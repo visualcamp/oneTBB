@@ -78,12 +78,21 @@ else()
     )
 endif()
 
-target_link_libraries(tbbmalloc_proxy
-    PRIVATE
-    TBB::tbbmalloc
-    Threads::Threads
-    ${TBB_LIB_LINK_LIBS}
-    ${TBB_COMMON_LINK_LIBS}
-)
+if (EMSCRIPTEN)
+    target_link_libraries(tbbmalloc_proxy
+        PRIVATE
+        TBB::tbbmalloc
+        ${TBB_LIB_LINK_LIBS}
+        ${TBB_COMMON_LINK_LIBS}
+    )
+else()
+    target_link_libraries(tbbmalloc_proxy
+        PRIVATE
+        TBB::tbbmalloc
+        Threads::Threads
+        ${TBB_LIB_LINK_LIBS}
+        ${TBB_COMMON_LINK_LIBS}
+        )
+endif()
 
 tbb_install_target(tbbmalloc_proxy)

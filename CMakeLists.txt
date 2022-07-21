@@ -173,7 +173,9 @@ endforeach()
 # -------------------------------------------------------------------
 # Common dependencies
 set(THREADS_PREFER_PTHREAD_FLAG TRUE)
-find_package(Threads REQUIRED)
+if (NOT EMSCRIPTEN)
+    find_package(Threads REQUIRED)
+endif()
 # -------------------------------------------------------------------
 
 file(GLOB FILES_WITH_EXTRA_TARGETS ${CMAKE_CURRENT_SOURCE_DIR}/cmake/*.cmake)

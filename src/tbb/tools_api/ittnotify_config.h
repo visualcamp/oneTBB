@@ -345,7 +345,8 @@ ITT_INLINE long
 __itt_interlocked_increment(volatile long* ptr) ITT_INLINE_ATTRIBUTE;
 ITT_INLINE long __itt_interlocked_increment(volatile long* ptr)
 {
-    return __TBB_machine_fetchadd4(ptr, 1) + 1L;
+  return __sync_fetch_and_add(ptr, 1) + 1L;
+//    return __TBB_machine_fetchadd4(ptr, 1) + 1L;
 }
 #endif /* ITT_SIMPLE_INIT */
 
